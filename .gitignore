@@ -1,0 +1,8 @@
+*.class
+typescript/**/*.js
+node_modules/
+target/
+out/
+.idea/
+*.iml
+.DS_Store
