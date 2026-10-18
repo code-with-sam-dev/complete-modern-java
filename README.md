@@ -69,6 +69,28 @@ in the episode on errors.
 
 Set `milk` to `2` in both files and run them again: `Items: 4`, `Total: $4.98`.
 
+## Episode 2: Install Java 25 and IntelliJ IDEA on a Mac
+
+1. Download IntelliJ IDEA from jetbrains.com (one download; core Java is free, no sign in).
+2. New Project: name `GroceryReceipt`, build system IntelliJ, untick "Add sample code".
+3. JDK: Download JDK, version 25, vendor Eclipse Temurin. Note the location it shows.
+4. Right click `src`, New, Java Compact File, name it `GroceryReceipt`, type the program from Episode 1,
+   and press the green arrow.
+
+Then check the terminal. If `java -version` shows an older Java, point this one window at the new JDK
+(use the location from step 3; nothing here is permanent):
+
+```sh
+java -version
+type -a java
+export JAVA_HOME=$HOME/Library/Java/JavaVirtualMachines/temurin-25.0.4.1/Contents/Home
+export PATH="$JAVA_HOME/bin:$PATH"
+java -version
+java src/GroceryReceipt.java
+```
+
+Windows gets its own episode.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
