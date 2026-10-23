@@ -199,6 +199,35 @@ Items: 3
 Total: $3.99
 ```
 
+## Episode 5: Use the Debugger (Java and TypeScript)
+
+The receipt from Episode 4 with `milk + milkPrice` instead of `milk * milkPrice` prints `Total: $4.99`
+and no error. A debugger finds where the wrong value is made.
+
+**Java, in IntelliJ IDEA.** Click the line number of the `total` line: a red dot, a breakpoint. **Run**
+ignores it. **Debug** (the bug icon, or the menu beside `void main()`) stops on that line, before it
+runs: Variables shows `bread = 2`, `milk = 1`, `breadPrice = 1.5`, `milkPrice = 0.99`, and no `total`
+yet. **Step Over** runs the line: `total = 4.99`. In the Evaluate box, `milk * milkPrice` is `0.99` and
+`milk + milkPrice` is `1.99`. **Resume** runs to the next breakpoint or the end; **Stop** ends it.
+
+**TypeScript, free.** The free IntelliJ IDEA does not debug TypeScript, so use Node's inspector and Chrome:
+
+```sh
+node --inspect-brk groceryReceipt.ts   # pauses before the first line and waits
+```
+
+Open `chrome://inspect` in Chrome, click **inspect** under Remote Target. In Sources, click line 6 for a
+breakpoint, Resume, read Scope, Step over: `total: 4.99`. DevTools shows your file with the types
+replaced by spaces, which is what Node runs. Close DevTools to let Node exit.
+
+A debugger shows what your program does. You still need to know what it should do: predict first.
+
+### The challenge
+
+`java/ep05/challenge/ItemsReceipt.java` and `typescript/ep05/challenge/itemsReceipt.ts` print
+`Items: 4`, but Sarah bought three things. Use a breakpoint to find the line that makes 4, and fix
+the reason, not the number.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
