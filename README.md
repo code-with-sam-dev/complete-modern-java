@@ -13,10 +13,10 @@ At the time of recording:
 | Tool | Version | Pinned in |
 |---|---|---|
 | Java | 25 LTS (Amazon Corretto 25.0.4) | `.sdkmanrc` |
-| Node.js | 24.22.0 LTS | `.nvmrc` |
+| Node.js | 24.22.1 LTS (through nvm 0.40.8) | `.nvmrc` |
 | TypeScript | 7.0.2 | `typescript/package.json` |
 
-Installing all three, step by step, is Episode 2.
+Installing Java is Episode 2. Installing Node and TypeScript is Episode 3.
 
 ## Episode 1: Your First Java Program, Explained
 
@@ -90,6 +90,69 @@ java src/GroceryReceipt.java
 ```
 
 Windows gets its own episode.
+
+## Episode 3: Install Node.js and TypeScript on a Mac
+
+No admin password is needed: nvm installs Node inside your home folder. Apple's command line
+tools are a separate prerequisite; if `xcode-select -p` prints an error, `xcode-select --install`
+is Apple's installer, and it may ask for an administrator password.
+
+The commands come from nodejs.org, Download, macOS, nvm. Take them from there, not from here.
+
+```sh
+node -v                    # zsh: command not found: node
+xcode-select -p            # prints a folder: Apple's tools are installed
+ls ~/.zshrc                # a new Mac has none, and nvm needs it
+touch ~/.zshrc
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
+```
+
+Open a new terminal tab, then:
+
+```sh
+command -v nvm             # nvm
+nvm install 24
+node -v                    # v24.22.1 at the time of recording
+npm -v                     # 11.19.1
+which node                 # ~/.nvm/versions/node/v24.22.1/bin/node
+```
+
+A TypeScript project, with TypeScript installed in the project rather than for the whole Mac:
+
+```sh
+npm init -y
+npm install --save-dev typescript
+npx tsc -v                 # Version 7.0.2
+```
+
+Then type `groceryReceipt.ts` (the same receipt, in `typescript/ep03`) and run it:
+
+```sh
+npx tsc groceryReceipt.ts  # no output means no errors; writes groceryReceipt.js
+node groceryReceipt.js
+node groceryReceipt.ts     # Node removes the types and runs it, without checking them
+```
+
+### Running is not checking
+
+Change `milk` to the text `"2"`:
+
+- `node groceryReceipt.ts` still runs: `Items: 22` (`+` joins text) and `Total: $4.98` (`*` turns the
+  text back into a number, so the total looks right).
+- `npx tsc --noEmit groceryReceipt.ts` refuses: `TS2322: Type 'string' is not assignable to type
+  'number'`, and writes nothing.
+
+### If your screen does not match
+
+- `nvm: command not found`: there was no `~/.zshrc` when the installer ran. `touch ~/.zshrc`, run the
+  installer again, open a new tab.
+- `tsc: command not found`: tsc lives in the project. Use `npx tsc`, from the project folder.
+- IntelliJ says "Node.js is required": Settings, Languages & Frameworks, JavaScript Runtime, and choose
+  the Node in `~/.nvm`.
+
+### The challenge
+
+Set `bread` to `3`. Predict both lines, then run it: `Items: 4`, `Total: $5.49`.
 
 ## Shorts
 
