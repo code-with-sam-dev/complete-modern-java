@@ -154,6 +154,51 @@ Change `milk` to the text `"2"`:
 
 Set `bread` to `3`. Predict both lines, then run it: `Items: 4`, `Total: $5.49`.
 
+## Episode 4: Read Your First Errors (Java and TypeScript)
+
+Four kinds of error, each broken on purpose, read, fixed and run again. Run every Java file from
+the folder that holds it with `java File.java`, and check every TypeScript file with
+`npx tsc --noEmit file.ts` before running it with `node file.ts`.
+
+| Kind | Java | TypeScript |
+|---|---|---|
+| Syntax | `';' expected`, `1 error`, `compilation failed` | `TS1005: ')' expected.`; Node refuses too: `SyntaxError` |
+| Compile | `cannot find symbol`, then `symbol:` and `location:` | `TS2551 ... Did you mean 'toUpperCase'?`, yet `node` runs it and crashes: `TypeError ... is not a function` |
+| Runtime | `NumberFormatException: For input string: "one"` and a stack trace | no crash: `Milk: NaN` |
+| Logic | `+` for `*`: `Total: $4.99`, no message | the same, and `tsc` is quiet |
+
+The files in `java/ep04` and `typescript/ep04` are as typed in the video, mistakes included:
+`Typo.java` and `typo.ts` call `toUppercase` (capital C fixes them), `Runtime.java` and `nan.ts`
+are given the word `"one"` (the digit `"1"` fixes them).
+
+### Reading a stack trace
+
+Read the top line first: the exception and its message. Then go down to the first line from your
+own code, here `at Runtime.main(Runtime.java:3)`, and open that line. The lines above it are
+Java's own code, the path the problem took, not separate errors.
+
+### One habit for every error
+
+1. Read the main message.
+2. Find the location: the file and line; in a stack trace, the first line from your own code.
+3. Open that line, and the line above it.
+4. Change one thing, and run it again.
+
+The location is where the compiler noticed the problem, not always where it was made: a missing
+bracket at the end of a line is often reported on the next line.
+
+### The challenge
+
+`java/ep04/challenge/BrokenReceipt.java` and `typescript/ep04/challenge/brokenReceipt.ts` each
+have three mistakes: a syntax error, a misspelled method and a `+` where there should be a `*`.
+Fix one at a time, running after every fix, until both print:
+
+```text
+Sarah's groceries
+Items: 3
+Total: $3.99
+```
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
