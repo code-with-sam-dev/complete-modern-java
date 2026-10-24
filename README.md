@@ -401,6 +401,40 @@ decision; use `===` and `!==`, which never convert values before comparing.
 Set `totalCents` in `java/ep10/challenge/Predict.java` to 4999, 5000 and 5001 and predict each result first. The
 answers: `Delivery: $4.99`, `Free delivery`, `Free delivery`.
 
+## Episode 11: More Than One Condition (Java and TypeScript)
+
+The rules: a basket of $100 or more gets a free gift; $50 or more gets free delivery, members only; everyone
+else pays $4.99. This picks one message, not every benefit.
+
+| Operator | Means | `totalCents = 5240`, `member = true` |
+|---|---|---|
+| `&&` | both must be true | `totalCents >= 5000 && member` is `true` |
+| `\|\|` | at least one is true, including both | `totalCents >= 10000 \|\| member` is `true` |
+| `!` | flips a boolean | `!member` is `false` |
+
+```java
+if (totalCents >= 10000) {
+    IO.println("Free gift");
+} else if (totalCents >= 5000 && member) {
+    IO.println("Free delivery");
+} else {
+    IO.println("Delivery: $4.99");
+}
+```
+
+The first condition that is true decides, and the rest are not checked. 5240 and a member: `Free delivery`;
+5240, not a member: `Delivery: $4.99`; 12000, either: `Free gift`. `Wrong.java` checks free delivery first, so a
+member spending 12000 cents gets `Free delivery` and the gift is skipped: put the bigger reward first.
+
+`Average.java`: with `items = 0`, `items > 0 && totalCents / items > 1000` prints `No qualifying average` and no
+error, because `&&` stops at the first false and the division never runs. `&&` binds before `||`; use brackets to
+show the grouping you mean. `rules.ts` makes the same choice in TypeScript.
+
+### The challenge
+
+Change `totalCents` and `member` in `java/ep11/challenge/Predict.java` and predict first. 12000 and a member:
+`Free gift`. 6000, not a member: `Delivery: $4.99`. 6000 and a member: `Free delivery`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
