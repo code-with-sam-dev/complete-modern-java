@@ -303,6 +303,37 @@ Predict the five lines `java/ep07/challenge/Predict.java` prints, then run it. T
 2.0
 ```
 
+## Episode 8: Decimals Are Not Exact (Java and TypeScript)
+
+Bread $1.10, milk $2.20: `IO.println(1.10 + 2.20);` prints `3.3000000000000003`, and `0.1 + 0.2 == 0.3`
+prints `false`. A double stores numbers in binary. In binary, one tenth repeats forever, the way one third
+does in decimal, so Java stores the nearest double it can, and two tiny gaps added show in the answer.
+
+| Line | Prints |
+|---|---|
+| `IO.println(0.1);` | `0.1` (the shortest decimal that identifies the stored double) |
+| `IO.println(new BigDecimal(0.1));` | `0.1000000000000000055511151231257827021181583404541015625` |
+| `IO.println(new BigDecimal("0.1"));` | `0.1` |
+| `int totalCents = 110 + 220;` | `330` |
+| `new BigDecimal("1.10").add(new BigDecimal("2.20"))` | `3.30` |
+
+Two ways to keep money exact: whole cents in an `int`, or `BigDecimal` made from text and added with `.add`.
+Make a BigDecimal from text, not from a double. In TypeScript, `number` is the same kind of double:
+`money.ts` prints `0.30000000000000004`, `3.3000000000000003` and `330`.
+
+The files in `java/ep08` and `typescript/ep08` are as typed in the video. `Money.java` starts with
+`import java.math.BigDecimal;`, which tells Java where to find BigDecimal.
+
+### The challenge
+
+Predict the three lines `java/ep08/challenge/Predict.java` prints, then run it. The answers:
+
+```text
+0.30000000000000004
+0.3
+330
+```
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
