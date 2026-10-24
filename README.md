@@ -461,6 +461,26 @@ same countdown and for loop in TypeScript, with `let`.
 
 Predict what `java/ep12/challenge/Predict.java` prints, then run it. The answer: `2`, `4`, `6`.
 
+## Episode 13: Methods (Java and TypeScript)
+
+The same separator printed twice (`Dup.java`) means two places to change. A method gives the instructions a name.
+
+| Shape | Java | Prints |
+|---|---|---|
+| no input, no result | `void printLine()` in `Lines.java` | `----------`, `Sarah's groceries`, `----------` |
+| input, no result | `void printCustomLine(String symbol)` in `Custom.java` | `==========`, `**********` |
+| inputs and a result | `int lineTotal(int quantity, int priceCents)` in `Totals.java` | `300`, then `399` |
+
+When Java reaches a call, it runs that method's instructions, then carries on in main right after the call.
+`void` means the method gives nothing back to its caller. `main` is a method too: where this program starts. The
+names in a method's brackets are parameters; the values in a call are arguments. `return` sends a value back, and
+the type before the name says what kind. In TypeScript (`receipt.ts`) these are functions, and the return type goes
+after the brackets: `function lineTotal(quantity: number, priceCents: number): number`.
+
+### The challenge
+
+Predict what `java/ep13/challenge/Predict.java` prints, then run it. The answer: `648`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
