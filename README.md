@@ -334,6 +334,38 @@ Predict the three lines `java/ep08/challenge/Predict.java` prints, then run it. 
 330
 ```
 
+## Episode 9: Number Limits (Java and TypeScript)
+
+`int cents = 2_000_000_000;` then `cents + cents` prints `-294967296`: negative money and no error. An `int` stores
+32 bits, so it has a fixed range, -2,147,483,648 to 2,147,483,647. Past the top it wraps round to the most
+negative value, like a car odometer rolling over: overflow. The underscores only make the number easier to read.
+
+| Line | Prints |
+|---|---|
+| `Integer.MAX_VALUE` | `2147483647` |
+| `Integer.MAX_VALUE + 1` | `-2147483648` |
+| `long bigCents = 2_000_000_000L;` then `bigCents + bigCents` | `4000000000` |
+| `Long.MAX_VALUE` | `9223372036854775807` |
+| `Math.addExact(Integer.MAX_VALUE, 1)` | `ArithmeticException: integer overflow` |
+| `7.0 / 0`, `0.0 / 0` | `Infinity`, `NaN` |
+| `10 / people` with `people = 0` | `ArithmeticException: / by zero` |
+
+The `L` marks a long literal. `Math.addExact` stops the program instead of returning a wrong number; it is in its
+own file, `Exact.java`, so its exception does not stop the other lines. In TypeScript, `limits.ts` prints
+`4000000000` (no wrap at two billion: numbers are doubles), then `9007199254740991` and `9007199254740992` for
+`9007199254740992 + 1`: past the safe integer limit, whole numbers are not exact. `10 / 0` is `Infinity` and
+`0 / 0` is `NaN`, with no error.
+
+### The challenge
+
+Predict the three lines `java/ep09/challenge/Predict.java` prints, then run it. The answers:
+
+```text
+-2147483648
+4000000000
+Infinity
+```
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
