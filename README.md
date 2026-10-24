@@ -265,6 +265,44 @@ Total: 4.99
 false
 ```
 
+## Episode 7: Expressions and Operators (Java and TypeScript)
+
+Four friends split a $10 bill. `int total = 10; int people = 4;` and `total / people` prints `2`. Java has
+not lost any money: we divided two ints, and it kept the whole part.
+
+An **expression** is a piece of code that produces a value: `total / people`, `7 + 2`, even `total` on its own.
+`int total = 10;` is a statement: it creates a variable and stores a value.
+
+| Java | Prints | Why |
+|---|---|---|
+| `7 + 2`, `7 - 2`, `7 * 2` | `9`, `5`, `14` | |
+| `7 / 2` | `3` | two ints: the whole part only, never rounded |
+| `7 % 2` | `1` | the remainder: seven sweets shared by two, one left over |
+| `10.0 / people` | `2.5` | one double in the division: decimal division |
+| `2 + 3 * 4` | `14` | `*` and `/` before `+` and `-` |
+| `(2 + 3) * 4` | `20` | brackets first |
+| `10 / 4 * 1.0` | `2.0` | left to right: `10 / 4` is already `2` |
+| `10 * 1.0 / 4` | `2.5` | the double comes first |
+| `(10 / 4)` | `2` | brackets change the order, never the types |
+
+The files in `java/ep07` and `typescript/ep07` are as typed in the video: `Bill.java` prints `2`, `2.5`, `2.5`;
+`Ops.java` prints `9 5 14 3 1`; `Order.java` prints `14 20 2.0 2.5 2`. In TypeScript, `ops.ts` prints `3.5`,
+`2.5`, `14` and `2`: one number type, so `10 / 4` is `2.5`, and `Math.floor(10 / 4)` rounds down to `2`.
+
+A double is fine for this lesson, but it is not how real systems keep money. Episode 8 shows why.
+
+### The challenge
+
+Predict the five lines `java/ep07/challenge/Predict.java` prints, then run it. The answers:
+
+```text
+4
+1
+4.5
+14
+2.0
+```
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
