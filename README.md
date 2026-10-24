@@ -481,6 +481,21 @@ after the brackets: `function lineTotal(quantity: number, priceCents: number): n
 
 Predict what `java/ep13/challenge/Predict.java` prints, then run it. The answer: `648`.
 
+## Episode 14: Arrays (Java and TypeScript)
+
+An array keeps several values of the same type under one name: `int[] prices = {150, 99, 250};`. Indexes start at
+0: `prices[0]` is `150`, `prices[2]` is `250`, and `prices.length` is `3`, so the valid indexes are 0, 1 and 2.
+`prices[1] = 120;` changes one box. A Java array has a fixed length.
+
+`Bounds.java` asks for `prices[3]` and stops with `ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3`:
+the last index is always `length - 1`. `Show.java` prints an array directly (a code such as `[I@768b970c`, different
+each run) and then with `Arrays.toString(prices)`: `[150, 120, 250]`. In TypeScript, `prices.ts` reads `prices[3]` as
+`undefined` with no error, and JavaScript arrays can grow.
+
+### The challenge
+
+Predict the two lines `java/ep14/challenge/Predict.java` prints, then run it. The answers: `300` and `4`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
