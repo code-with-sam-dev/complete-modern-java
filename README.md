@@ -366,6 +366,41 @@ Predict the three lines `java/ep09/challenge/Predict.java` prints, then run it. 
 Infinity
 ```
 
+## Episode 10: Decisions with if and else (Java and TypeScript)
+
+Free delivery from $50, kept in whole cents: `int totalCents = 5240;`. `totalCents >= 5000` is a comparison, and it
+gives a boolean: `true`.
+
+```java
+if (totalCents >= 5000) {
+    IO.println("Free delivery");
+} else {
+    IO.println("Delivery: $4.99");
+}
+IO.println("Thank you, Sarah");
+```
+
+Exactly one branch runs, then the program carries on: `true`, `Free delivery`, `Thank you, Sarah`. With `4240` it
+prints `false`, `Delivery: $4.99`, `Thank you, Sarah`. `>=` means exactly $50 qualifies.
+
+| Operator | `items = 3` | Prints |
+|---|---|---|
+| `==` equal | `items == 3` | `true` |
+| `!=` not equal | `items != 3` | `false` |
+| `<` | `items < 5` | `true` |
+| `>` | `items > 5` | `false` |
+| `<=` | `items <= 3` | `true` |
+| `>=` | `items >= 4` | `false` |
+
+`5000 > 5000` is `false` but `5000 >= 5000` is `true`. `if (items = 5)` does not compile: `incompatible types: int
+cannot be converted to boolean`. One `=` assigns, two `==` compare. In TypeScript, `delivery.ts` makes the same
+decision; use `===` and `!==`, which never convert values before comparing.
+
+### The challenge
+
+Set `totalCents` in `java/ep10/challenge/Predict.java` to 4999, 5000 and 5001 and predict each result first. The
+answers: `Delivery: $4.99`, `Free delivery`, `Free delivery`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
