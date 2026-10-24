@@ -435,6 +435,32 @@ show the grouping you mean. `rules.ts` makes the same choice in TypeScript.
 Change `totalCents` and `member` in `java/ep11/challenge/Predict.java` and predict first. 12000 and a member:
 `Free gift`. 6000, not a member: `Delivery: $4.99`. 6000 and a member: `Free delivery`.
 
+## Episode 12: Loops (Java and TypeScript)
+
+A countdown by hand (`Manual.java`) is four printlns. A loop repeats the work instead.
+
+```java
+int count = 3;
+while (count > 0) {
+    IO.println(count);
+    count = count - 1;
+}
+IO.println("Go!");
+```
+
+Three parts: the start (`count = 3`), the check (`count > 0`, asked before every repetition) and the update
+(`count = count - 1`). It prints `3 2 1 Go!`. If the check is false at the start, the body never runs.
+`Forever.java` leaves the update out, so it never finishes: stop it with Ctrl+C in the terminal.
+
+`for (int i = 1; i <= 3; i++)` puts the same three parts on one line and prints `Item 1 Item 2 Item 3`; `i++` adds
+one after each repetition. `for (int i = 0; i < 3; i++)` prints `0 1 2`: it starts at 0, and `< 3` stops before 3.
+`Loaves.java` adds 150 cents three times with `totalCents += breadPriceCents;` and prints `450`. `loops.ts` is the
+same countdown and for loop in TypeScript, with `let`.
+
+### The challenge
+
+Predict what `java/ep12/challenge/Predict.java` prints, then run it. The answer: `2`, `4`, `6`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
