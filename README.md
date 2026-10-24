@@ -228,6 +228,43 @@ A debugger shows what your program does. You still need to know what it should d
 `Items: 4`, but Sarah bought three things. Use a breakpoint to find the line that makes 4, and fix
 the reason, not the number.
 
+## Episode 6: Values and Types (Java and TypeScript)
+
+Two loaves and one milk printed `Items: 21`. The values were right; the types decided what `+` did.
+
+In `int bread = 2;`, `2` is the value (written in the code, a literal), `bread` is the variable,
+`int` is the type, and `=` is assignment: it puts 2 into bread.
+
+| Java | TypeScript | Holds | Printed |
+|---|---|---|---|
+| `int quantity = 3;` | `let quantity: number = 3;` | whole numbers | `3` |
+| `double price = 4.99;` | `let price: number = 4.99;` | numbers with a decimal point | `4.99` |
+| `boolean paid = false;` | `let paid: boolean = false;` | true or false | `false` |
+| `String product = "Milk";` | `let product: string = "Milk";` | text | `Milk` |
+| `char grade = 'A';` | (no char type) | one character, single quotes | `A` |
+
+The files in `java/ep06` and `typescript/ep06` are as typed in the video:
+
+- `Items.java`: `"Items: " + bread + milk` prints `Items: 21` (left to right, a String joins);
+  `"Items: " + (bread + milk)` prints `Items: 3` (brackets first, the numbers add).
+- `Types.java`: the five types, then `double whole = 4;` prints `4.0` and `quantity = 4;` prints `4`.
+- `Price.java`: `double price = 1.5;` prints `1.5`. Change `double` to `int` and Java refuses:
+  `incompatible types: possible lossy conversion from double to int`.
+- `types.ts`: `npx tsc --noEmit types.ts` is quiet and `node types.ts` prints `3 4.99 false Milk 3`.
+  Add `quantity = "three";` or `inferred = "three";` and the check fails with `TS2322`: inferred
+  types are checked too.
+
+### The challenge
+
+Predict the three lines `java/ep06/challenge/Predict.java` and `typescript/ep06/challenge/predict.ts`
+print, then run them. The answers:
+
+```text
+3
+Total: 4.99
+false
+```
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
