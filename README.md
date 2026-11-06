@@ -577,6 +577,28 @@ it returns `NaN` (`Number.isNaN` is `true`).
 Predict what `java/ep18/challenge/Predict.java` prints. The answer: `One`, `Caught`, `Three`. `Two` never prints,
 because the line before it threw.
 
+## Episode 19: ArrayList, A List That Can Grow (Java and TypeScript)
+
+`java/ep19/Full.java`: an array of three strings is full, and `basket[3]` stops with
+`ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3`. `java/ep19/Cart.java` uses
+`ArrayList<String> basket = new ArrayList<>();` (no import is needed in a compact source file; a normal class file
+needs `import java.util.ArrayList;`): `add` three items, `[Bread, Milk, Eggs]`, `size()` 3, `get(0)` Bread;
+`remove("Milk")` leaves `[Bread, Eggs]`, `contains("Milk")` is `false`, and a for-each prints each item. Its last
+line, `basket.get(5)`, throws `IndexOutOfBoundsException: Index 5 out of bounds for length 2`.
+
+A list holds objects: `ArrayList<int>` does not compile (`unexpected type`), and `java/ep19/Numbers.java` uses
+`ArrayList<Integer>`: `[150, 99]`. `java/ep19/Remove.java`: on a list of `Integer`, `remove(1)` removes the item at
+index 1, leaving `[10, 30]`.
+
+TypeScript arrays already grow: `typescript/ep19/cart.ts` pushes, removes by value with `indexOf` and a check for `-1`
+before `splice`, and reads `basket[5]` as `undefined`. `typescript/ep19/trap.ts` shows why the check matters:
+`indexOf("Rice")` is `-1`, and `splice(-1, 1)` removes the last item.
+
+### The challenge
+
+Predict the two lines `java/ep19/challenge/Predict.java` prints. The answers: `3` and `Eggs`, because when Milk was
+removed, Eggs moved up to index 1.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
