@@ -516,6 +516,25 @@ prints `NaN` with no error, because `prices[3]` is `undefined`.
 Predict what `java/ep15/challenge/Predict.java` prints, 1000 or 900, then run it. The answer: `900`, because the
 loop starts at index 1 and skips the first price.
 
+## Episode 16: Classes and Objects (Java and TypeScript)
+
+A class describes a kind of thing; `new` makes an object from it. `java/ep16/Fields.java` declares
+`class Product { String name; int priceCents; }` in the same file as `main`, makes `new Product()`, and prints its
+fields before setting them: `null` and `0`, the defaults Java gives fields. `null` means the name does not refer to
+any text yet. A local variable gets no default: `java/ep16/Local.java` stops with
+`variable count might not have been initialized`.
+
+`java/ep16/Shop.java` adds a constructor, so `new Product("Bread", 150)` is one line (`this.name` is the field,
+`name` the value passed in), and a method, `label()`, which prints `Bread: 150 cents` and `Milk: 99 cents`: one class,
+two objects, each with its own values. An array of products and a for-each loop add up `249`. The fields are left
+open on purpose; Episode 17 protects them. In TypeScript, `typescript/ep16/shop.ts` has the same shape; inside a
+method every field needs `this.`.
+
+### The challenge
+
+Predict the two lines `java/ep16/challenge/Predict.java` prints, then run it. The answers: `Toast: 150 cents` and
+`Milk: 99 cents`, because changing one object does not change the other.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
