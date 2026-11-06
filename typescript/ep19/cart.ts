@@ -9,5 +9,5 @@ if (index !== -1) {
     basket.splice(index, 1);
 }
 console.log(basket);
-console.log(basket.includes("Milk"));
+console.log(basket.indexOf("Milk"));
 console.log(basket[5]);
