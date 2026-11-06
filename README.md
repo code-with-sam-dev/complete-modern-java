@@ -556,6 +556,27 @@ inside the file's own class, and Java's access rules let that class reach its pr
 `java/ep17/challenge/Predict.java`: which marked line compiles? Only `bread.setPriceCents(300);` (it prints `300`);
 `bread.priceCents = 300;` is the private access error.
 
+## Episode 18: Exceptions, Catch It and Keep Going (Java and TypeScript)
+
+`java/ep18/Checkout.java` makes eggs at -5 with Episode 17's `Product`, and the program stops: `IllegalArgumentException:
+price cannot be negative`, with the trace `at Product.setPriceCents(Product.java:20)`, `at Product.<init>(Product.java:7)`,
+`at Checkout.main(Checkout.java:2)`. Read it from the top: where it was thrown, then how the program got there.
+
+`java/ep18/SafeCheckout.java` wraps the risky lines in `try` and catches `IllegalArgumentException`: it prints
+`Could not add eggs: price cannot be negative` and `Checkout continues`. `Added Eggs` is skipped, because Java leaves the
+try block at the throw, and the program carries on after the catch, never back at the line that failed. With a
+price of 30, nothing is thrown and the catch is skipped. `java/ep18/Quantity.java` catches the
+`NumberFormatException` from `Integer.parseInt("two")`: `Not a number: two`; with `"2"` it prints `Quantity: 2`.
+
+In TypeScript, `typescript/ep18/store.ts`: the caught value is `unknown` (`e.message` is error TS18046), so the catch
+checks `if (e instanceof Error)` first. `typescript/ep18/parse.ts`: JavaScript's `parseInt("two")` does not throw,
+it returns `NaN` (`Number.isNaN` is `true`).
+
+### The challenge
+
+Predict what `java/ep18/challenge/Predict.java` prints. The answer: `One`, `Caught`, `Three`. `Two` never prints,
+because the line before it threw.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
