@@ -496,6 +496,26 @@ each run) and then with `Arrays.toString(prices)`: `[150, 120, 250]`. In TypeScr
 
 Predict the two lines `java/ep14/challenge/Predict.java` prints, then run it. The answers: `300` and `4`.
 
+## Episode 15: Loop Over an Array (Java and TypeScript)
+
+`java/ep15/Basket.java` adds up every price with one loop: `for (int i = 0; i < prices.length; i++)` with
+`total += prices[i];` prints `499`, and the enhanced for, `for (int price : prices)`, prints `499` too. Read it as
+"for each price in prices": no index, so no boundary to get wrong. Use the loop with the index when you need the
+position.
+
+Change `<` to `<=` and Java stops with `ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3`: the
+condition lets `i` reach 3, and the body reads `prices[3]`. With `int[] prices = {};` both loops run zero times and
+print `0`. In TypeScript, `typescript/ep15/basket.ts` uses `for` with `let i` and `for...of`; the same `<=` mistake
+prints `NaN` with no error, because `prices[3]` is `undefined`.
+
+`java/ep15/Twice.java`: reassigning `price` inside a for-each over an `int[]` leaves the array as
+`[150, 99, 250]`; `prices[i] = prices[i] * 2` gives `[300, 198, 500]`.
+
+### The challenge
+
+Predict what `java/ep15/challenge/Predict.java` prints, 1000 or 900, then run it. The answer: `900`, because the
+loop starts at index 1 and skips the first price.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
