@@ -535,6 +535,27 @@ method every field needs `this.`.
 Predict the two lines `java/ep16/challenge/Predict.java` prints, then run it. The answers: `Toast: 150 cents` and
 `Milk: 99 cents`, because changing one object does not change the other.
 
+## Episode 17: Encapsulation, Protect Your Object's Data (Java and TypeScript)
+
+With Episode 16's open fields, `bread.priceCents = -5;` runs and prints `-5`. Here `Product` gets its own file,
+`java/ep17/Product.java`, and its fields are `private`: from `Store.java`, the same line is a compile error,
+`priceCents has private access in Product`. Getters, `getName()` and `getPriceCents()`, let other code read the
+values. A setter, `setPriceCents`, changes the price, and it checks first: a negative price throws
+`IllegalArgumentException: price cannot be negative`. The constructor calls the same setter, so the rule lives in
+one place: `java src/Store.java` (from `java/ep17`, `java Store.java`) prints `Bread`, `150`, `200`, then stops at
+`new Product("Eggs", -5)`. The name has no setter, so it cannot change after construction.
+
+`java/ep17/same-file/Same.java` shows why `Product` moved: declared in the same compact file as `main`, it is nested
+inside the file's own class, and Java's access rules let that class reach its private members, so the file prints
+`-5`. In TypeScript, `typescript/ep17/product.ts`: `npx tsc --noEmit` reports
+`Property 'priceCents' is private and only accessible within class 'Product'`, but `node product.ts` still prints
+`150` twice, because node does not check types.
+
+### The challenge
+
+`java/ep17/challenge/Predict.java`: which marked line compiles? Only `bread.setPriceCents(300);` (it prints `300`);
+`bread.priceCents = 300;` is the private access error.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
