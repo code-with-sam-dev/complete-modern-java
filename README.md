@@ -570,7 +570,7 @@ price of 30, nothing is thrown and the catch is skipped. `java/ep18/Quantity.jav
 
 In TypeScript, `typescript/ep18/store.ts`: the caught value is `unknown` (`e.message` is error TS18046), so the catch
 checks `if (e instanceof Error)` first. `typescript/ep18/parse.ts`: JavaScript's `parseInt("two")` does not throw,
-it returns `NaN` (`Number.isNaN` is `true`).
+it returns `NaN` (`isNaN` is `true`).
 
 ### The challenge
 
