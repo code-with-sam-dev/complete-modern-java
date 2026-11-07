@@ -796,6 +796,30 @@ abstract is a rule for the checker.
 `java/ep28/challenge/VoucherPayment.java` adds a fixed 50 cent fee without changing PaymentMethod. `Try.java` prints
 `Voucher: 1050`.
 
+## Episode 29: Polymorphism, One Method Call and Different Behaviour (Java and TypeScript)
+
+`java/ep29/StringTill.java` works out a total from a type name: if card, the price plus two percent; if cash, the
+price; otherwise it throws. Card and cash print `1020` and `1000`, then voucher throws `unknown payment type: voucher`.
+An if statement is not wrong, and for two fixed types it may be the simplest thing; but every new type means editing
+this method.
+
+`java/ep29/Till.java` does the same job with `int totalFor(PaymentMethod method, int priceCents)`, which just asks the
+object: `method.totalCents(priceCents)`. Card and cash print `1020` and `1000`. `VoucherPayment` (last episode's
+challenge) adds a fixed 50 cent fee, and one more call prints `1050`: the class was created and passed in, but the
+checkout calculation did not change.
+
+One `PaymentMethod` variable holding a card, then cash, with the identical call, prints `1020` then `1000`: the
+variable is still a PaymentMethod; the object changed. Every payment uses the same inherited `totalCents`, and inside
+it Java calls the `feeCents` belonging to the actual object. That is polymorphism.
+
+In TypeScript, `typescript/ep29/till.ts` has the same abstract class, three payment types and a `totalFor` function:
+`1020`, `1000`, `1050`.
+
+### The challenge
+
+Add a fourth payment type without changing `totalFor`. One answer: `java/ep29/challenge/GiftCardPayment.java` with a
+25 cent fee; the challenge `Till.java` prints `1025` for it.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
