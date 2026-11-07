@@ -769,6 +769,33 @@ time.
 
 `java/ep27/challenge/Relationships.md`: three pairs to classify, answers included.
 
+## Episode 28: Abstract Classes, Share Code and Require Methods (Java and TypeScript)
+
+`java/ep28/PaymentMethod.java` is an abstract class: a private name, a constructor, `getName()`, an unfinished
+`abstract int feeCents(int priceCents)` with no body, and a finished `totalCents`, which returns the price plus
+`feeCents(priceCents)`. The finished method calls the unfinished one; abstract describes an incomplete class, and not
+every method in it is abstract.
+
+`CardPayment` and `CashPayment` extend it, call `super` with their names, and fill in the fee: two percent for card
+(whole cents, so fractions are dropped) and nothing for cash. In our little shop each payment type decides its own fee;
+real payment systems have more rules. `java/ep28/Payments.java` first asks a `PaymentMethod` variable holding a card for
+its total: `1020`. Then a list of both prints `Card: 1020` and `Cash: 1000`: `totalCents` was written once, and each
+object supplied its own fee. `new PaymentMethod("Voucher")` does not compile: `PaymentMethod is abstract; cannot be
+instantiated`.
+
+An interface describes what an object promises to do; an abstract class can provide some of the work and leave the rest
+to its subclasses. Java interfaces can have method bodies too; this abstract class has a field and a constructor, and a
+class can extend only one class.
+
+In TypeScript, `typescript/ep28/pay.ts` prints the same two lines. `new PaymentMethod("Voucher")` makes `tsc` report
+TS2511, but `node` creates it anyway, and calling `totalCents` then fails with `this.feeCents is not a function`:
+abstract is a rule for the checker.
+
+### The challenge
+
+`java/ep28/challenge/VoucherPayment.java` adds a fixed 50 cent fee without changing PaymentMethod. `Try.java` prints
+`Voucher: 1050`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
