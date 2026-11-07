@@ -668,6 +668,30 @@ In TypeScript, `typescript/ep23/menu.ts` loops `for (const entry of catalog)` wi
 
 `java/ep23/challenge/Sugar.java` adds Sugar at 180. The values loop adds up to `878`.
 
+## Episode 24: static and Constants, Values That Belong to the Class (Java and TypeScript)
+
+`java/ep24/Product.java` gains three things that belong to the class rather than to each product. `private static int
+createdCount` is one counter shared by every product; the constructor adds one after the price has been checked, and
+`static int getCreatedCount()` returns it. `static final int MAX_PRICE_CENTS = 100_000` is a constant: the underscore
+only makes the number easier to read. `static boolean isValidPrice(int priceCents)` uses it, and the setter now throws
+`price out of range` when a price is not valid.
+
+`java/ep24/Counter.java` asks the class, not an object: `0`, then `2` after two products, `100000`, `true` for 150 and
+`false` for 150_000, and finally `Bread` from `bread.getName()`.
+
+Two mistakes from the episode, both caught by the compiler. `Product.MAX_PRICE_CENTS = 5;` gives `cannot assign a value
+to static final variable MAX_PRICE_CENTS`. `Product.getName()` gives `non-static method getName() cannot be referenced
+from a static context`: a name belongs to one product, so ask an object.
+
+In TypeScript, `typescript/ep24/counter.ts` uses `static readonly MAX_PRICE_CENTS` and a `static createdCount`: `0`,
+`2`, `100000`. Adding `Product.MAX_PRICE_CENTS = 5;` makes `tsc` report TS2540, "Cannot assign to 'MAX_PRICE_CENTS'
+because it is a read-only property", but `node` still runs it: readonly is a rule for the checker.
+
+### The challenge
+
+`java/ep24/challenge/Fail.java` makes a product at 150_000 cents inside a `try`, then prints `getCreatedCount()`. It
+prints `price out of range` and then `0`: the constructor threw before the count went up.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
