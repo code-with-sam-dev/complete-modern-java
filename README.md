@@ -635,6 +635,23 @@ with `===` on the name and `splice(i, 1)` removes Milk.
 `java/ep21/challenge/Predict.java`: Milk, Eggs, Milk, Bread, then `removeByName("Milk")` once. The answer: Eggs,
 Milk, Bread. Only the first Milk goes.
 
+## Episode 22: HashMap, Find a Product by Name (Java and TypeScript)
+
+`java/ep22/Catalog.java` keeps products in a `HashMap<String, Product>`: the key is the name, the value the product.
+`put` three, `size()` is `3`, and `catalog.get("Milk")` finds Milk (`99`) without a search loop. Putting `"Milk"`
+again with 120 replaces the value (`120`, size still `3`): a key links to one value, and the key now points to a
+different product. `remove("Eggs")` leaves `2`. A missing key: `containsKey("Rice")` is `false`, `get("Rice")` is
+`null`, and asking that null for its price throws a `NullPointerException`. `java/ep22/Safe.java` checks
+`containsKey` first and prints `Rice is not in the catalog`. A `HashMap` does not promise to keep insertion order.
+
+In TypeScript, `typescript/ep22/catalog.ts` uses a `Map<string, Product>`: `set`, `get`, `has`, `delete`, and `size`
+as a property; a missing key gives `undefined` (Java gives `null`). It prints `3`, `99`, `false`, `undefined`.
+
+### The challenge
+
+Add Coffee at 350, read its price by name, then look up Tea without crashing. One answer is
+`java/ep22/challenge/Coffee.java`: `350`, then `Tea is not in the catalog`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
