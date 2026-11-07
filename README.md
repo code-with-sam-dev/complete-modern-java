@@ -652,6 +652,22 @@ as a property; a missing key gives `undefined` (Java gives `null`). It prints `3
 Add Coffee at 350, read its price by name, then look up Tea without crashing. One answer is
 `java/ep22/challenge/Coffee.java`: `350`, then `Tea is not in the catalog`.
 
+## Episode 23: Loop Through a HashMap, Keys and Values (Java and TypeScript)
+
+`java/ep23/Menu.java` puts Bread, Milk, Eggs and Rice into a `HashMap`, in that order, and goes through it three ways.
+`keySet()` gives the names; on the recording machine they came out Eggs, Bread, Milk, Rice. A `HashMap` does not promise
+to keep the order you added things in, so yours may differ, and both are correct. With each name, `get` fetches the
+product: `Eggs: 250` and so on. `values()` gives just the products: the loop adds up `698`. `entrySet()` gives each
+key with its value (`Map.Entry`), so the name and the price come together without calling `get` again. No import is
+needed in a compact source file. If order matters, Java has `LinkedHashMap`.
+
+In TypeScript, `typescript/ep23/menu.ts` loops `for (const entry of catalog)` with `entry[0]` (the name) and `entry[1]`
+(the product): Bread, Milk, Eggs, Rice, the order they were set in. A TypeScript `Map` keeps insertion order.
+
+### The challenge
+
+`java/ep23/challenge/Sugar.java` adds Sugar at 180. The values loop adds up to `878`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
