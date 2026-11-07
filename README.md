@@ -599,6 +599,24 @@ before `splice`, and reads `basket[5]` as `undefined`. `typescript/ep19/trap.ts`
 Predict the two lines `java/ep19/challenge/Predict.java` prints. The answers: `3` and `Eggs`, because when Milk was
 removed, Eggs moved up to index 1.
 
+## Episode 20: A List of Objects, A Shopping Cart That Adds Itself Up (Java and TypeScript)
+
+`java/ep20/Groceries.java` keeps an `ArrayList<Product>` in `main` and adds up `getPriceCents()` with a for-each:
+`499`. Then the list and the loop move into a class that owns them, `java/ep20/ShoppingCart.java`, with a private
+`ArrayList<Product> items` and three methods: `add`, `count` and `totalCents`. A normal class file needs
+`import java.util.ArrayList;`; the compact files so far got it without one. `Product` needs no import (our own class,
+same folder), and `ShoppingCart` has no `main`. `java/ep20/Shopping.java` only asks the cart: `0`, then `3` and `499`.
+
+`add` checks first: `cart.add(null)` throws `IllegalArgumentException: product cannot be null`. Without that check,
+the null is accepted and the program fails later with a `NullPointerException` inside `totalCents`. In TypeScript,
+`typescript/ep20/shoppingCart.ts` mirrors the cart (`push`, `length`, `for...of`) and prints `2` and `249`;
+`cart.add(null)` there is refused by the checker: `Argument of type 'null' is not assignable to parameter of type
+'Product'`.
+
+### The challenge
+
+`java/ep20/challenge/Predict.java` adds a fourth product at 199. The answers: `4` and `698`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
