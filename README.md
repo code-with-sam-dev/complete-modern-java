@@ -617,6 +617,24 @@ the null is accepted and the program fails later with a `NullPointerException` i
 
 `java/ep20/challenge/Predict.java` adds a fourth product at 199. The answers: `4` and `698`.
 
+## Episode 21: Remove From the Cart, When Are Two Objects the Same? (Java and TypeScript)
+
+`java/ep21/Returns.java` prints the cart's names (Bread, Milk, Eggs), then `cart.remove(new Product("Milk", 99))`
+prints `false` and the count stays `3`. `remove` asks each item whether it is equal; `Product` has never said what
+equal means, so only the very same object matches. `java/ep21/Twins.java`: two new Milks give `false` for both `==`
+and `equals`, while `"Milk".equals("Milk")` is `true` (String has that rule).
+
+Removing the object we kept, `cart.remove(milk)`, prints `true`, then `2` and `400`. `ShoppingCart.removeByName`
+is the cart's own rule: a loop with an index, `equals` on the name, remove the first match and return `true`
+straight away, `false` if nothing matched: Eggs `true`, Rice `false`, total `150`. In TypeScript,
+`typescript/ep21/returns.ts`: `first === second` is `false`, `indexOf(second)` is `-1`, and a `removeByName` function
+with `===` on the name and `splice(i, 1)` removes Milk.
+
+### The challenge
+
+`java/ep21/challenge/Predict.java`: Milk, Eggs, Milk, Bread, then `removeByName("Milk")` once. The answer: Eggs,
+Milk, Bread. Only the first Milk goes.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
