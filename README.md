@@ -718,6 +718,33 @@ a class that has the right method without saying `implements`; Java needs the wo
 `java/ep25/challenge/FixedOff.java` implements `Discount` and removes a fixed number of cents, never going below
 zero. With the same `printTotal`: `Total: 900` for 1000, and `Total: 0` for 50.
 
+## Episode 26: Inheritance, When One Class Extends Another (Java and TypeScript)
+
+The test first: every fresh product is a product, but not every product is a fresh product. `java/ep26/Product.java`
+gains `String describe()`, which returns the name and the price in cents. `java/ep26/FreshProduct.java` says
+`class FreshProduct extends Product`: it adds `daysLeft` (just a number given to the object, not an expiry system),
+and its constructor calls `super(name, priceCents)` first, which runs Product's constructor and its price check.
+Product has no constructor without arguments, so a child class must call one.
+
+`java/ep26/Shelf.java` makes a fresh milk and calls `getName()` and `getPriceCents()`, which FreshProduct never wrote:
+`Milk`, `99`, then `3`. The milk object holds a name and a price, but they are private to Product, so FreshProduct
+uses the methods Product provides. `@Override String describe()` returns `super.describe()` plus the days left:
+`Milk: 99, 3 days left`. Misspell the method under `@Override` and Java says `method does not override or implement a
+method from a supertype`. In the constructor `super(...)` runs the parent's constructor; in `describe` it calls the
+parent's method.
+
+An `ArrayList<Product>` holds rice and the milk, and the same `describe()` call prints `Rice: 199` and `Milk: 99, 3
+days left`: the milk really is a FreshProduct, so its own version runs. That is polymorphism.
+
+In TypeScript, `typescript/ep26/shelf.ts` uses `extends`, `super(name, priceCents)` before `this`, and the `override`
+keyword: the same two lines. Setting `this.daysLeft` before `super` makes `tsc` report TS17009, "'super' must be called
+before accessing 'this' in the constructor of a derived class".
+
+### The challenge
+
+`java/ep26/challenge/Cheese.java` adds a FreshProduct cheese at 350 with 5 days left. Its name comes from the inherited
+getter, `Cheese`, and the loop's new line is `Cheese: 350, 5 days left`.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
