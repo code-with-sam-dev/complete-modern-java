@@ -745,6 +745,30 @@ before accessing 'this' in the constructor of a derived class".
 `java/ep26/challenge/Cheese.java` adds a FreshProduct cheese at 350 with 5 days left. Its name comes from the inherited
 getter, `Cheese`, and the loop's new line is `Cheese: 350, 5 days left`.
 
+## Episode 27: Composition or Inheritance, When Not to Use extends (Java and TypeScript)
+
+`java/ep27/CartAsProduct.java` extends Product and calls `super("Cart", 0)`. It compiles without a complaint, yet a
+shopping cart is not a kind of product: the compiler checks whether inheritance is legal, not whether the model makes
+sense.
+
+A fresh product IS a product (inheritance, Episode 26). A shopping cart HAS products: `ShoppingCart` keeps them in a
+private `ArrayList` inside it. That is composition. `java/ep27/Carts.java` adds Rice and a fresh Milk to the unchanged
+cart: `2` and `298`.
+
+`java/ep27/Trolley.java` is the tempting shortcut: `class Trolley extends ArrayList<Product> {}`. It accepts
+`add(null)` (size `2`) and `clear()` (size `0`): every list method became the trolley's, including ones that bypass the
+cart's rule. The cart refuses: `cart.add(null)` throws `product cannot be null`, and `cart.clear()` does not compile
+(`cannot find symbol`). The cart decides which operations exist. Extending a list is not always wrong; it just hands
+out every operation the list has.
+
+In TypeScript, `typescript/ep27/carts.ts` keeps `private items`. `cart.items.length = 0` makes `tsc` report TS2341,
+but `node` still runs it and the count becomes `0`: TypeScript's `private` is a checker rule, not protection at run
+time.
+
+### The challenge
+
+`java/ep27/challenge/Relationships.md`: three pairs to classify, answers included.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
