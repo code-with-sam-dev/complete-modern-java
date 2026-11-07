@@ -692,6 +692,32 @@ because it is a read-only property", but `node` still runs it: readonly is a rul
 `java/ep24/challenge/Fail.java` makes a product at 150_000 cents inside a `try`, then prints `getCreatedCount()`. It
 prints `price out of range` and then `0`: the constructor threw before the count went up.
 
+## Episode 25: Interfaces, a Promise a Class Makes (Java and TypeScript)
+
+`java/ep25/Discount.java` is an interface: one method, `int apply(int priceCents)`, with no body. In this example it
+only declares the method, so `new Discount()` is refused: `Discount is abstract; cannot be instantiated`.
+
+Two classes keep the promise with `implements`. `NoDiscount.java` gives the price back; `PercentOff.java` takes a
+percent and returns `priceCents - priceCents * percent / 100`. These are whole numbers, so the division drops the
+fraction: 499 at 10 percent is 450. Both write `public int apply`: a method like this in an interface is public
+automatically, and leaving `public` out gives `attempting to assign weaker access privileges; was public`. Deleting
+`apply` from a class that says `implements Discount` gives `NoDiscount is not abstract and does not override abstract
+method apply(int) in Discount`.
+
+`java/ep25/Offers.java` (run with `java Offers.java`, the other files beside it) keeps one `Discount` variable and
+gives it three objects from two classes: `1000`, `900`, `500`. Then `printTotal(int priceCents, Discount discount)`
+works with any of them without changing: `Total: 499`, `Total: 450`, `Total: 250`.
+
+In TypeScript, `typescript/ep25/discount.ts` does the same with `interface Discount` and `implements`, using
+`Math.floor` to keep whole cents. Remove `apply` from a class and `tsc` reports TS2420; `node` does not check
+interfaces, so it starts and then fails at the call with `discount.apply is not a function`. TypeScript also accepts
+a class that has the right method without saying `implements`; Java needs the word.
+
+### The challenge
+
+`java/ep25/challenge/FixedOff.java` implements `Discount` and removes a fixed number of cents, never going below
+zero. With the same `printTotal`: `Total: 900` for 1000, and `Total: 0` for 50.
+
 ## Shorts
 
 `typescript/shorts/price.ts`: `tsc price.ts` reports a type error, but `node price.ts` still
